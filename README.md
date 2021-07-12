@@ -22,7 +22,10 @@ Corailed is Unrailed! simulator using C++ with some reinforcement learning and U
 
 ## Quick Start
 
-TBA
+```
+cd PyCorailed
+python PyCorailed.py
+```
 
 ## Documentation
 
