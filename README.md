@@ -50,15 +50,13 @@ Copyright &copy; 2021 Corailed Team
 
   * [Chris Ohk](http://www.github.com/utilForever)
   * [Seungwoo Yoo](https://github.com/DveloperY0115)
-  * [Minseob Kim](https://github.com/kingofprogramming)
+  * [Minseob Kim](https://github.com/MinseobKimm)
   * [Harry Kim](https://github.com/harrykim0610)
   * [Young Song](https://github.com/SONGYOUNGSONGYOUNG)
-  * [Minjun Lee](https://github.com/dlalswnsamrlwld)
+  * [Minjun Lee](https://github.com/ameumeu)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Baba Is You was created by Arvi "Hempuli" Teikari, a Finnish game developer known for other titles such as *Environmental Station Alpha* and *Stumblehill*.
