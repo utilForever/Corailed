@@ -5,7 +5,7 @@ from colorama import init, Fore, Back, Style
 from detection import axe, pickaxe, trees, player, rock, blackrock, river, terrain, green
 
 
-def test(im, game):
+def recognize_objects(im, game):
     set_array_from_bin(game, im)
 
 def set_array_from_bin(game, im):
@@ -99,7 +99,7 @@ def unpack_array(arr, vall, game, offset=(0, 0)):
             game.matrix_add(e[0] - offset[0], e[1] - offset[1], vall)
 
 
-def draw(im):
+def draw_object_contours(im):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
     player.draw_contours_return_bin(im, im_hsv)
@@ -113,7 +113,7 @@ def draw(im):
     terrain.draw_contours_return_bin(im, im_hsv )
 
 
-def cut(im):
+def cut_image(im):
     im = rotate(im, -8)
     x, y = 0, 125
     h, w = 320, 800
@@ -128,7 +128,7 @@ def cut(im):
     pts1 = np.float32([a, b, c])
     pts2 = np.float32([d, e, f])
 
-    dst = im  # Uh Oh
+    dst = im
 
     M = cv2.getAffineTransform(pts1, pts2)
     dst = cv2.warpAffine(im, M, (cols, rows))
@@ -136,7 +136,7 @@ def cut(im):
     return dst
 
 
-def grid(im):
+def draw_grid(im):
     tiny_offset = 0
 
     for x in range(5, 900, 22):

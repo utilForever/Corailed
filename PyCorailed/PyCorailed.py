@@ -31,15 +31,15 @@ while True:
     start = time.time()
 
     # Take screenshot from window and cut it
-    frame = capture.screenshot()
-    im2 = functions.cut(frame)
+    frame = capture.take_screenshot()
+    im2 = functions.cut_image(frame)
 
     # Recognize objects on the image
-    functions.test(im2, game_map)
+    functions.recognize_objects(im2, game_map)
 
     # Draw contours of objects and grid
-    functions.draw(im2)
-    functions.grid(im2) 
+    functions.draw_object_contours(im2)
+    functions.draw_grid(im2) 
 
     # Show game clone
     cv2.imshow("Unrailed! Clone", im2)

@@ -14,7 +14,7 @@ class WindowCapture:
         self.window_name = window_name
         self.wait_time = 1 / capture_rate
 
-    def screenshot(self):
+    def take_screenshot(self):
         if platform == "win32":
             hwnd = win32gui.FindWindow(None, self.window_name)
             if not hwnd:
