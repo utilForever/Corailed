@@ -11,7 +11,6 @@ HSV_MAX_THRESH = np.array([5, 25, 255])
 
 def _remove_random_from_bin_image(bin_image, nb_components, stats, w, h):
     """ algorithm that remove anything but rock"""
-
     for i in range(nb_components):
         if stats[i][2] < w // 15:
             for y in range(stats[i][1], stats[i][1] + stats[i][3] + 1):
@@ -22,7 +21,6 @@ def _remove_random_from_bin_image(bin_image, nb_components, stats, w, h):
 
 def draw_contours_return_bin(image, hsv_image, color=(255, 150, 255)):
     """Draws contours of rocks found in image"""
-
     h, w = image.shape[:
                        -1]  # remove last value because we don't need the channels
     bin_image = cv2.inRange(
@@ -50,7 +48,6 @@ def draw_contours_return_bin(image, hsv_image, color=(255, 150, 255)):
 
 def get_bin(image, hsv_image, color=(255, 150, 255)):
     """get contours of rocks found in image"""
-
     h, w = image.shape[:
                        -1]  # remove last value because we don't need the channels
     bin_image = cv2.inRange(

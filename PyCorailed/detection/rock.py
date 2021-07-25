@@ -19,7 +19,6 @@ HSV_MAX_THRESH_SUB = np.array([16, 255, 255])
 
 def _remove_random_from_mask(mask, nb_components, stats, w, h):
     """ algorithm that remove anything but rock"""
-
     for i in range(nb_components):
         if stats[i][2] < w//15:
             for y in range(stats[i][1], stats[i][1]+stats[i][3]+1):
@@ -29,13 +28,11 @@ def _remove_random_from_mask(mask, nb_components, stats, w, h):
 
 def draw_contours_return_bin(image, hsv_image, color=(255, 0, 150)):
     """Draws contours of rocks found in image"""
-
     h, w = image.shape[:-1] # remove last value because we don't need the channels
     bin_image = cv2.inRange(hsv_image, HSV_MIN_THRESH, HSV_MAX_THRESH) # create the mask with the treshold values on the hsv image and not BGR
     bin_image2= cv2.inRange(hsv_image, HSV_MIN_THRESH_SUB, HSV_MAX_THRESH_SUB) # create the mask with the treshold values on the hsv image and not BGR
 
     # get the locations of the rocks then remove the grass
-
     nb_components, output, stats, centroids = cv2.connectedComponentsWithStats(bin_image, 8, cv2.CV_32S)
     #_remove_random_from_mask(bin_image, nb_components, stats, w, h)
 
@@ -48,7 +45,6 @@ def draw_contours_return_bin(image, hsv_image, color=(255, 0, 150)):
     result2 = cv2.bitwise_not(result2)
     result = cv2.bitwise_and(result, result2)
 
-
     contours, hierarchy = cv2.findContours(dilated_bin_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     cv2.drawContours(image, contours, -1, color, 3)
 
@@ -56,12 +52,10 @@ def draw_contours_return_bin(image, hsv_image, color=(255, 0, 150)):
 
 def get_bin(image, hsv_image, color=(255, 0, 150)):
     """get contours of rocks found in image"""
-
     h, w = image.shape[:-1] # remove last value because we don't need the channels
     bin_image = cv2.inRange(hsv_image, HSV_MIN_THRESH, HSV_MAX_THRESH) # create the mask with the treshold values on the hsv image and not BGR
 
     # get the locations of the rocks then remove the grass
-
     nb_components, output, stats, centroids = cv2.connectedComponentsWithStats(bin_image, 8, cv2.CV_32S)
     _remove_random_from_mask(bin_image, nb_components, stats, w, h)
 

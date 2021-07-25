@@ -39,7 +39,7 @@ while True:
 
     # Draw contours of objects and grid
     functions.draw_object_contours(im2)
-    functions.draw_grid(im2) 
+    functions.draw_grid(im2)
 
     # Show game clone
     cv2.imshow("Unrailed! Clone", im2)

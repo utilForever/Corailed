@@ -17,7 +17,6 @@ HSV_MAX_THRESH_ROCK = np.array([16, 255, 255])
 
 def _remove_all_from_bin_image(bin_image, nb_components, stats, w, h):
     """Sets everything but terrain to 0 in binary image"""
-
     for i in range(nb_components):
         if stats[i][2] < w // 50:
             for y in range(stats[i][1], stats[i][1] + stats[i][3] + 1):
@@ -28,7 +27,6 @@ def _remove_all_from_bin_image(bin_image, nb_components, stats, w, h):
 
 def draw_contours_return_bin(image, hsv_image, color=(255, 255, 255)):
     """Draws contours of the terrain found in image"""
-
     h, w = image.shape[:
                        -1]  # remove last value because we don't need the channels
     bin_image = cv2.inRange(
@@ -41,7 +39,6 @@ def draw_contours_return_bin(image, hsv_image, color=(255, 255, 255)):
     bin_image += cv2.inRange(hsv_image, HSV_MIN_THRESH_ROCK,
                              HSV_MAX_THRESH_ROCK)
     # get the locations of the river then remove the grass
-
     nb_components, output, stats, centroids = cv2.connectedComponentsWithStats(
         bin_image, 8, cv2.CV_32S)
     _remove_all_from_bin_image(bin_image, nb_components, stats, w, h)
@@ -60,7 +57,6 @@ def draw_contours_return_bin(image, hsv_image, color=(255, 255, 255)):
 
 def get_bin(image, hsv_image, color=(255, 255, 255)):
     """get contours of the terrain found in image"""
-
     h, w = image.shape[:
                        -1]  # remove last value because we don't need the channels
     bin_image = cv2.inRange(hsv_image, HSV_MIN_THRESH, HSV_MAX_THRESH)
@@ -72,7 +68,6 @@ def get_bin(image, hsv_image, color=(255, 255, 255)):
     bin_image += cv2.inRange(hsv_image, HSV_MIN_THRESH_ROCK,
                              HSV_MAX_THRESH_ROCK)
     # get the locations of the river then remove the grass
-
     nb_components, output, stats, centroids = cv2.connectedComponentsWithStats(
         bin_image, 8, cv2.CV_32S)
     _remove_all_from_bin_image(bin_image, nb_components, stats, w, h)

@@ -13,7 +13,7 @@ class Map:
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
 
-        self.wait_time = 1/refresh_rate
+        self.wait_time = 1 / refresh_rate
 
         self.should_stop = False
 
@@ -21,7 +21,7 @@ class Map:
         self.binary = []
 
         self.im = np.zeros((self.height * self.cell_size_y,
-                           self.width * self.cell_size_x, 3), np.uint8)
+                            self.width * self.cell_size_x, 3), np.uint8)
 
     def start(self):
         self._thread = Thread(target=self.update,
@@ -77,9 +77,9 @@ class Map:
         for j in range(len(self.matrix)):
             for i in range(len(self.matrix[0])):
                 if self.matrix[j][i] == 'P' or \
-                        self.matrix[j][i] == 'M' or  \
-                        self.matrix[j][i] == 't' or  \
-                        self.matrix[j][i] == 'k' or  \
+                        self.matrix[j][i] == 'M' or \
+                        self.matrix[j][i] == 't' or \
+                        self.matrix[j][i] == 'k' or \
                         self.matrix[j][i] == 'A' or \
                         self.matrix[j][i] == 'I':
                     binary[j][i] = 0
@@ -100,7 +100,6 @@ class Map:
             self.matrix[j][i] = letter
 
     def draw_matrix(self):
-
         size_x = self.width * self.cell_size_x
         size_y = self.height * self.cell_size_y
 
@@ -148,7 +147,6 @@ class Map:
             self.draw(i, j, (255, 0, 0))
 
     def replace_letter(self, new, old, check):
-
         for j in range(len(self.matrix)):
             for i in range(len(self.matrix[0])):
                 if self.matrix[j][i] == new:
@@ -156,14 +154,14 @@ class Map:
 
         for j in range(len(self.matrix)):
             for i in range(len(self.matrix[0])):
-                if self.matrix[j][i] == old and i-1 > 0 and self.matrix[j][i-1] == check:
+                if self.matrix[j][i] == old and i - 1 > 0 and self.matrix[j][i - 1] == check:
                     self.matrix[j][i] = new
-                elif self.matrix[j][i] == old and i+1 < len(self.matrix[0]) and self.matrix[j][i+1] == check:
+                elif self.matrix[j][i] == old and i + 1 < len(self.matrix[0]) and self.matrix[j][i + 1] == check:
                     self.matrix[j][i] = new
 
-                elif self.matrix[j][i] == old and j-1 > 0 and self.matrix[j-1][i] == check:
+                elif self.matrix[j][i] == old and j - 1 > 0 and self.matrix[j - 1][i] == check:
                     self.matrix[j][i] = new
-                elif self.matrix[j][i] == old and j+1 < len(self.matrix) and self.matrix[j+1][i] == check:
+                elif self.matrix[j][i] == old and j + 1 < len(self.matrix) and self.matrix[j + 1][i] == check:
                     self.matrix[j][i] = new
 
     def get_pos(self, e):
@@ -186,11 +184,10 @@ class Map:
                     functions.set_pixel_color(self.im, x, y, (155, 0, 155))
 
     def draw(self, i, j, color):
-
         for y in range(1, self.cell_size_y):
             for x in range(1, self.cell_size_x):
                 functions.set_pixel_color(
-                    self.im, x+i*self.cell_size_x, y+j*self.cell_size_y, color)
+                    self.im, x + i * self.cell_size_x, y + j * self.cell_size_y, color)
 
     def draw_image(self):
         return self.im

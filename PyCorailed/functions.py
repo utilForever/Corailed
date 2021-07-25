@@ -8,6 +8,7 @@ from detection import axe, pickaxe, trees, player, rock, blackrock, river, terra
 def recognize_objects(im, game_map):
     set_array_from_bin(game_map, im)
 
+
 def set_array_from_bin(game_map, im):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
@@ -22,8 +23,8 @@ def set_array_from_bin(game_map, im):
     bin_terrain = terrain.get_bin(im, im_hsv)
 
     axe_pos = axe.get_axe_minimap(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
-    pickaxe_pos = pickaxe.get_axe_minimap(im,
-                                          cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
+    pickaxe_pos = pickaxe.get_axe_minimap(
+        im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
 
     arr_tree = get_object(game_map, bin_trees, bin_trees, 3)
     arr_rock = get_object(game_map, bin_rocks, bin_rocks, 5)
@@ -84,8 +85,7 @@ def get_object(game, bin, im, nb):
                 somme += (arrE[i][0] != 0 and arrE[i][1] != 0
                           and arrE[i][2] != 0)
             if somme >= nb:
-                result.append([x // 22 - 1,
-                               y // 16])
+                result.append([x // 22 - 1, y // 16])
 
     return result
 
@@ -94,7 +94,7 @@ def unpack_array(arr, vall, game, offset=(0, 0)):
     for e in arr:
         pass
         if e[0] - offset[0] > 0 and e[0] - offset[0] < len(game.matrix[0]) \
-        and e[1] - offset[1] > 0 and e[1] - offset[1] < len(game.matrix):
+                and e[1] - offset[1] > 0 and e[1] - offset[1] < len(game.matrix):
 
             game.add_matrix(e[0] - offset[0], e[1] - offset[1], vall)
 
@@ -109,8 +109,8 @@ def draw_object_contours(im):
     trees.draw_contours_return_bin(im, im_hsv)
     rock.draw_contours_return_bin(im, im_hsv)
     blackrock.draw_contours_return_bin(im, im_hsv)
-    river.draw_contours_return_bin(im, im_hsv )
-    terrain.draw_contours_return_bin(im, im_hsv )
+    river.draw_contours_return_bin(im, im_hsv)
+    terrain.draw_contours_return_bin(im, im_hsv)
 
 
 def cut_image(im):
