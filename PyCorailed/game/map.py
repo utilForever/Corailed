@@ -95,7 +95,7 @@ class Map:
                 x += str(self.binary[j][i]) + " "
             print(Fore.WHITE + x)
 
-    def matrix_add(self, i, j, letter):
+    def add_matrix(self, i, j, letter):
         if i < len(self.matrix[0]) and j < len(self.matrix):
             self.matrix[j][i] = letter
 

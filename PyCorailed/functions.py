@@ -5,14 +5,14 @@ from colorama import init, Fore, Back, Style
 from detection import axe, pickaxe, trees, player, rock, blackrock, river, terrain, green
 
 
-def recognize_objects(im, game):
-    set_array_from_bin(game, im)
+def recognize_objects(im, game_map):
+    set_array_from_bin(game_map, im)
 
-def set_array_from_bin(game, im):
+def set_array_from_bin(game_map, im):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
     bin_player = player.get_bin(im, im_hsv)
-    arrplayer = element(game, bin_player, bin_player, 3)
+    arr_player = get_object(game_map, bin_player, bin_player, 3)
 
     bin_green = green.get_bin(im, im_hsv)
     bin_trees = trees.get_bin(im, im_hsv)
@@ -25,44 +25,44 @@ def set_array_from_bin(game, im):
     pickaxe_pos = pickaxe.get_axe_minimap(im,
                                           cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
 
-    arrtree = element(game, bin_trees, bin_trees, 3)
-    arrrock = element(game, bin_rocks, bin_rocks, 5)
-    arrblack = element(game, bin_black, bin_black, 3)
-    arrriver = element(game, bin_river, bin_river, 3)
-    arrmain = element(game, bin_green, bin_green, 3)
+    arr_tree = get_object(game_map, bin_trees, bin_trees, 3)
+    arr_rock = get_object(game_map, bin_rocks, bin_rocks, 5)
+    arr_black = get_object(game_map, bin_black, bin_black, 3)
+    arr_river = get_object(game_map, bin_river, bin_river, 3)
+    arr_main = get_object(game_map, bin_green, bin_green, 3)
+    arr_out = get_object(game_map, bin_terrain, bin_terrain, 6)
 
-    arrout = element(game, bin_terrain, bin_terrain, 6)
+    unpack_array(arr_rock, 'K', game_map)
+    unpack_array(arr_main, 'M', game_map)
+    unpack_array(arr_river, 'R', game_map)
+    unpack_array(arr_black, 'B', game_map)
+    unpack_array(arr_tree, 'T', game_map)
+    unpack_array(arr_out, '0', game_map)
 
-    unpack_array(arrrock, 'K', game)
-    unpack_array(arrmain, 'M', game)
-    unpack_array(arrriver, 'R', game)
-    unpack_array(arrblack, 'B', game)
-    unpack_array(arrtree, 'T', game)
-    unpack_array(arrout, '0', game)
-
-    unpack_array(arrplayer, 'P', game, (0, -1))
+    unpack_array(arr_player, 'P', game_map, (0, -1))
 
     if pickaxe_pos != None:
         for i in range(len(axe_pos)):
             axe_pos[i] = (axe_pos[i][0] // 22, axe_pos[i][1] // 16)
-            unpack_array(axe_pos, 'A', game, (0, -1))
+            unpack_array(axe_pos, 'A', game_map, (0, -1))
 
     if pickaxe_pos != None:
         for i in range(len(pickaxe_pos)):
             pickaxe_pos[i] = (pickaxe_pos[i][0] // 22, pickaxe_pos[i][1] // 16)
-            unpack_array(pickaxe_pos, 'I', game, (0, -1))
+            unpack_array(pickaxe_pos, 'I', game_map, (0, -1))
 
-    game.replace_letter('t', 'M', 'T')
-    game.replace_letter('k', 'M', 'K')
+    game_map.replace_letter('t', 'M', 'T')
+    game_map.replace_letter('k', 'M', 'K')
 
     for i in range(2):
         for j in range(20):
-            game.matrix_add(i, j, '0')
-    for j in range(20):
-        game.matrix_add(35, j, '0')
+            game_map.add_matrix(i, j, '0')
+
+    for i in range(20):
+        game_map.add_matrix(35, i, '0')
 
 
-def element(game, bin, im, nb):
+def get_object(game, bin, im, nb):
     result = []
     for x in range(22, 810, 22):
         for y in range(0, 320, 16):
@@ -85,7 +85,7 @@ def element(game, bin, im, nb):
                           and arrE[i][2] != 0)
             if somme >= nb:
                 result.append([x // 22 - 1,
-                               y // 16])  # minus one because magic
+                               y // 16])
 
     return result
 
@@ -96,7 +96,7 @@ def unpack_array(arr, vall, game, offset=(0, 0)):
         if e[0] - offset[0] > 0 and e[0] - offset[0] < len(game.matrix[0]) \
         and e[1] - offset[1] > 0 and e[1] - offset[1] < len(game.matrix):
 
-            game.matrix_add(e[0] - offset[0], e[1] - offset[1], vall)
+            game.add_matrix(e[0] - offset[0], e[1] - offset[1], vall)
 
 
 def draw_object_contours(im):
