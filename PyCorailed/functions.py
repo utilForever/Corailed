@@ -185,4 +185,4 @@ def set_pixel_color(im, x, y, color):
         im[y, x] = color
         return im
 
-    raise Exception("set_pixel_color: x and y out of range!")
+    return im
