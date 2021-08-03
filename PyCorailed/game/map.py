@@ -78,8 +78,6 @@ class Map:
             for i in range(len(self.matrix[0])):
                 if self.matrix[j][i] == 'P' or \
                         self.matrix[j][i] == 'M' or \
-                        self.matrix[j][i] == 't' or \
-                        self.matrix[j][i] == 'k' or \
                         self.matrix[j][i] == 'A' or \
                         self.matrix[j][i] == 'I':
                     binary[j][i] = 0
@@ -117,12 +115,8 @@ class Map:
             self.draw(i, j, (86, 215, 156))
         elif e == 'T':
             self.draw(i, j, (109, 196, 63))
-        elif e == 't':
-            self.draw(i, j, (70, 156, 23))
         elif e == 'K':
             self.draw(i, j, (118, 150, 182))
-        elif e == 'k':
-            self.draw(i, j, (80, 100, 140))
         elif e == 'B':
             self.draw(i, j, (65, 65, 65))
         elif e == 'R':
@@ -145,24 +139,6 @@ class Map:
             self.draw(i, j, (255, 255, 255))
         elif e == 'U':
             self.draw(i, j, (255, 0, 0))
-
-    def replace_letter(self, new, old, check):
-        for j in range(len(self.matrix)):
-            for i in range(len(self.matrix[0])):
-                if self.matrix[j][i] == new:
-                    self.matrix[j][i] = old
-
-        for j in range(len(self.matrix)):
-            for i in range(len(self.matrix[0])):
-                if self.matrix[j][i] == old and i - 1 > 0 and self.matrix[j][i - 1] == check:
-                    self.matrix[j][i] = new
-                elif self.matrix[j][i] == old and i + 1 < len(self.matrix[0]) and self.matrix[j][i + 1] == check:
-                    self.matrix[j][i] = new
-
-                elif self.matrix[j][i] == old and j - 1 > 0 and self.matrix[j - 1][i] == check:
-                    self.matrix[j][i] = new
-                elif self.matrix[j][i] == old and j + 1 < len(self.matrix) and self.matrix[j + 1][i] == check:
-                    self.matrix[j][i] = new
 
     def get_pos(self, e):
         result = []

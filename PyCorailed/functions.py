@@ -1,15 +1,10 @@
 import cv2
 import numpy as np
-from colorama import init, Fore, Back, Style
 
 from detection import axe, pickaxe, tree, player, rock, black_rock, river, footpath, empty_space
 
 
 def recognize_objects(im, game_map):
-    set_array_from_bin(game_map, im)
-
-
-def set_array_from_bin(game_map, im):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
     bin_player = player.get_bin(im, im_hsv)
@@ -49,9 +44,6 @@ def set_array_from_bin(game_map, im):
         for i in range(len(pickaxe_pos)):
             pickaxe_pos[i] = (pickaxe_pos[i][0] // 22, pickaxe_pos[i][1] // 16)
             unpack_array(pickaxe_pos, 'I', game_map, (0, -1))
-
-    game_map.replace_letter('t', 'M', 'T')
-    game_map.replace_letter('k', 'M', 'K')
 
     for i in range(2):
         for j in range(20):
