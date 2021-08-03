@@ -18,13 +18,13 @@ def recognize_objects(im, game_map):
     bin_empty_space = empty_space.get_bin(im, im_hsv)
 
     # Get object from binary
-    arr_player = get_object(game_map, bin_player, bin_player, 3)
-    arr_tree = get_object(game_map, bin_tree, bin_tree, 3)
-    arr_rock = get_object(game_map, bin_rock, bin_rock, 5)
-    arr_black_rock = get_object(game_map, bin_black_rock, bin_black_rock, 3)
-    arr_river = get_object(game_map, bin_river, bin_river, 3)
-    arr_footpath = get_object(game_map, bin_footpath, bin_footpath, 3)
-    arr_empty_space = get_object(game_map, bin_empty_space, bin_empty_space, 6)
+    arr_player = get_object(bin_player, 3)
+    arr_tree = get_object(bin_tree, 3)
+    arr_rock = get_object(bin_rock, 5)
+    arr_black_rock = get_object(bin_black_rock, 3)
+    arr_river = get_object(bin_river, 3)
+    arr_footpath = get_object(bin_footpath, 3)
+    arr_empty_space = get_object(bin_empty_space, 6)
 
     # Get the position of axe and pickaxe
     axe_pos = axe.get_axe_minimap(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
@@ -59,7 +59,7 @@ def recognize_objects(im, game_map):
         game_map.add_matrix(35, i, '0')
 
 
-def get_object(game, bin, im, nb):
+def get_object(bin, threshold):
     """Get object from the image using the color in pixel"""
     result = []
 
@@ -87,7 +87,7 @@ def get_object(game, bin, im, nb):
 
             # If the number of pixel that contains the color \
             # greater than or equal to threshold, append to result
-            if num_color_pixel >= nb:
+            if num_color_pixel >= threshold:
                 result.append([x // 22 - 1, y // 16])
 
     return result
