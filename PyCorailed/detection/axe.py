@@ -14,20 +14,23 @@ def get_axe_location(image_gray):
 
 
 def draw_contours(image, image_gray, color=(150, 100, 200)):
-    """Draws the contours of the axes found in image"""
+    """Draws contours of the axe found in image"""
     try:
         for point in zip(*get_axe_location(image_gray)[::-1]):
+            # Get the location of the axe, invert the list, draw each points
             cv2.rectangle(image, (point[0] - 2, point[1] - 2),
                           (point[0] + width + 2, point[1] + height + 2), color, 2)
     except:
-        print("draw_contour: Could not find the axe")
+        print("draw_contours: Could not find the axe")
 
 
 def get_axe_minimap(image, image_gray):
+    """Get the posiion of the axe found in image"""
     result = []
 
     try:
         for point in zip(*get_axe_location(image_gray)[::-1]):
+            # Get the location of the axe, invert the list, draw each points
             result.append((point[0] + width // 2, point[1] + height // 2))
         return result
     except:

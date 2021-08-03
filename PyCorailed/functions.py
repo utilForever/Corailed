@@ -23,7 +23,7 @@ def set_array_from_bin(game_map, im):
     bin_terrain = terrain.get_bin(im, im_hsv)
 
     axe_pos = axe.get_axe_minimap(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
-    pickaxe_pos = pickaxe.get_axe_minimap(
+    pickaxe_pos = pickaxe.get_pickaxe_minimap(
         im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
 
     arr_tree = get_object(game_map, bin_trees, bin_trees, 3)
@@ -160,21 +160,25 @@ def rotate(image, angle):
 
 
 def get_pixel_color(im, x, y):
-    """get the pixel color"""
+    """Get the pixel color"""
     rows, cols = im.shape[:-1]
+
     if x < 0 and y < 0:
-        raise Exception("get pixel: coordinates need to be positive!")
+        raise Exception("get_pixel_color: Coordinates need to be positive!")
     if x < cols and y < rows:
         return im[y, x]
-    raise Exception("get pixel: x and y out of range!")
+
+    raise Exception("get_pixel_color: x and y out of range!")
 
 
 def set_pixel_color(im, x, y, color):
-    """set the pixel color"""
+    """Set the pixel color"""
     rows, cols = im.shape[:-1]
+
     if x < 0 and y < 0:
-        raise Exception("get pixel: coordinates need to be positive!")
+        raise Exception("set_pixel_color: Coordinates need to be positive!")
     if x < cols and y < rows:
         im[y, x] = color
         return im
-    return im
+
+    raise Exception("set_pixel_color: x and y out of range!")
