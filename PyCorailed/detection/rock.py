@@ -26,7 +26,7 @@ def _remove_random_from_mask(mask, nb_components, stats, w, h):
                     if y >= 0 and x >= 0 and y < h and x < w:
                         mask[y][x] = 0
 
-def draw_contours_return_bin(image, hsv_image, color=(255, 0, 150)):
+def draw_contours(image, hsv_image, color=(255, 0, 150)):
     """Draws contours of rocks found in image"""
     h, w = image.shape[:-1] # remove last value because we don't need the channels
     bin_image = cv2.inRange(hsv_image, HSV_MIN_THRESH, HSV_MAX_THRESH) # create the mask with the treshold values on the hsv image and not BGR

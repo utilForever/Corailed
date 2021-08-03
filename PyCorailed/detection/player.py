@@ -38,7 +38,7 @@ HSV_MIN_THRESH_RED = np.array([1, 180, 150])
 HSV_MAX_THRESH_RED = np.array([5, 220, 255])
 
 
-def draw_contours_return_bin(image, hsv_image, color=(0, 100, 255)):
+def draw_contours(image, hsv_image, color=(0, 100, 255)):
     """Draws contours of the terrain found in image"""
     h, w = image.shape[:
                        -1]  # remove last value because we don't need the channels

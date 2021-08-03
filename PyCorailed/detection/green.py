@@ -25,7 +25,7 @@ def _remove_all_from_bin_image(bin_image, nb_components, stats, w, h):
                         bin_image[y][x] = 0
 
 
-def draw_contours_return_bin(image, hsv_image, color=(255, 255, 255)):
+def draw_contours(image, hsv_image, color=(255, 255, 255)):
     """Draws contours of the terrain found in image"""
     h, w = image.shape[:
                        -1]  # remove last value because we don't need the channels

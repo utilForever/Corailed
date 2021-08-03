@@ -102,15 +102,15 @@ def unpack_array(arr, vall, game, offset=(0, 0)):
 def draw_object_contours(im):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
-    player.draw_contours_return_bin(im, im_hsv)
+    player.draw_contours(im, im_hsv)
     axe.draw_contours(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
     pickaxe.draw_contours(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
-    green.draw_contours_return_bin(im, im_hsv)
-    trees.draw_contours_return_bin(im, im_hsv)
-    rock.draw_contours_return_bin(im, im_hsv)
-    blackrock.draw_contours_return_bin(im, im_hsv)
-    river.draw_contours_return_bin(im, im_hsv)
-    terrain.draw_contours_return_bin(im, im_hsv)
+    green.draw_contours(im, im_hsv)
+    trees.draw_contours(im, im_hsv)
+    rock.draw_contours(im, im_hsv)
+    blackrock.draw_contours(im, im_hsv)
+    river.draw_contours(im, im_hsv)
+    terrain.draw_contours(im, im_hsv)
 
 
 def cut_image(im):

@@ -21,7 +21,7 @@ def _remove_river_from_bin_image(bin_image, nb_components, stats, w, h):
                         bin_image[y][x] = 0
 
 
-def draw_contours_return_bin(image, hsv_image, color=(150, 100, 200)):
+def draw_contours(image, hsv_image, color=(150, 100, 200)):
     """Draws contours of river found in image"""
     h, w = image.shape[:-
                        1]  # remove last value because we don't need the channels
