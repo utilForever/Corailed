@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from colorama import init, Fore, Back, Style
 
-from detection import axe, pickaxe, trees, player, rock, blackrock, river, terrain, green
+from detection import axe, pickaxe, tree, player, rock, black_rock, river, footpath, empty_space
 
 
 def recognize_objects(im, game_map):
@@ -13,36 +13,34 @@ def set_array_from_bin(game_map, im):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
     bin_player = player.get_bin(im, im_hsv)
-    arr_player = get_object(game_map, bin_player, bin_player, 3)
-
-    bin_green = green.get_bin(im, im_hsv)
-    bin_trees = trees.get_bin(im, im_hsv)
-    bin_rocks = rock.get_bin(im, im_hsv)
-    bin_black = blackrock.get_bin(im, im_hsv)
+    bin_tree = tree.get_bin(im, im_hsv)
+    bin_rock = rock.get_bin(im, im_hsv)
+    bin_black_rock = black_rock.get_bin(im, im_hsv)
     bin_river = river.get_bin(im, im_hsv)
-    bin_terrain = terrain.get_bin(im, im_hsv)
+    bin_footpath = footpath.get_bin(im, im_hsv)
+    bin_empty_space = empty_space.get_bin(im, im_hsv)
+
+    arr_player = get_object(game_map, bin_player, bin_player, 3)
+    arr_tree = get_object(game_map, bin_tree, bin_tree, 3)
+    arr_rock = get_object(game_map, bin_rock, bin_rock, 5)
+    arr_black_rock = get_object(game_map, bin_black_rock, bin_black_rock, 3)
+    arr_river = get_object(game_map, bin_river, bin_river, 3)
+    arr_footpath = get_object(game_map, bin_footpath, bin_footpath, 3)
+    arr_empty_space = get_object(game_map, bin_empty_space, bin_empty_space, 6)
 
     axe_pos = axe.get_axe_minimap(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
     pickaxe_pos = pickaxe.get_pickaxe_minimap(
         im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
 
-    arr_tree = get_object(game_map, bin_trees, bin_trees, 3)
-    arr_rock = get_object(game_map, bin_rocks, bin_rocks, 5)
-    arr_black = get_object(game_map, bin_black, bin_black, 3)
-    arr_river = get_object(game_map, bin_river, bin_river, 3)
-    arr_main = get_object(game_map, bin_green, bin_green, 3)
-    arr_out = get_object(game_map, bin_terrain, bin_terrain, 6)
-
-    unpack_array(arr_rock, 'K', game_map)
-    unpack_array(arr_main, 'M', game_map)
-    unpack_array(arr_river, 'R', game_map)
-    unpack_array(arr_black, 'B', game_map)
-    unpack_array(arr_tree, 'T', game_map)
-    unpack_array(arr_out, '0', game_map)
-
     unpack_array(arr_player, 'P', game_map, (0, -1))
+    unpack_array(arr_tree, 'T', game_map)
+    unpack_array(arr_rock, 'K', game_map)
+    unpack_array(arr_black_rock, 'B', game_map)
+    unpack_array(arr_river, 'R', game_map)
+    unpack_array(arr_footpath, 'M', game_map)
+    unpack_array(arr_empty_space, '0', game_map)
 
-    if pickaxe_pos != None:
+    if axe_pos != None:
         for i in range(len(axe_pos)):
             axe_pos[i] = (axe_pos[i][0] // 22, axe_pos[i][1] // 16)
             unpack_array(axe_pos, 'A', game_map, (0, -1))
@@ -105,12 +103,12 @@ def draw_object_contours(im):
     player.draw_contours(im, im_hsv)
     axe.draw_contours(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
     pickaxe.draw_contours(im, cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
-    green.draw_contours(im, im_hsv)
-    trees.draw_contours(im, im_hsv)
+    tree.draw_contours(im, im_hsv)
     rock.draw_contours(im, im_hsv)
-    blackrock.draw_contours(im, im_hsv)
+    black_rock.draw_contours(im, im_hsv)
     river.draw_contours(im, im_hsv)
-    terrain.draw_contours(im, im_hsv)
+    footpath.draw_contours(im, im_hsv)
+    empty_space.draw_contours(im, im_hsv)
 
 
 def cut_image(im):
