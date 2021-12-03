@@ -34,9 +34,14 @@ HSV_MAX_THRESH = np.array([10, 210, 255])
 """
 
 # Magic values for the player
+'''
 HSV_MIN_THRESH = np.array([1, 180, 150])
 HSV_MAX_THRESH = np.array([5, 220, 255])
+'''
 
+#new values for orange dinosaur
+HSV_MAX_THRESH = np.array([38,255,255])
+HSV_MIN_THRESH = np.array([13, 219, 163])
 
 def draw_contours(image, hsv_image, color=(0, 100, 255)):
     """Draws contours of the player found in image"""
