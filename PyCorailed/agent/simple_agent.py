@@ -1,4 +1,5 @@
 import pyautogui
+from pynput.keyboard import Key, Controller
 import random
 import time
 
@@ -17,9 +18,15 @@ DOWN_KEY = 'S'
 
 class SimpleAgent():
     def input_key(self, key, delta_time):
-        pyautogui.keyDown(key)
-        time.sleep(delta_time)
-        pyautogui.keyUp(key)
+        keyboard = Controller()
+        if key == 'space':
+            keyboard.press(Key.space)
+            time.sleep(delta_time)
+            keyboard.release(Key.space)
+        else:
+            keyboard.press(key)
+            time.sleep(delta_time)
+            keyboard.release(key)
     
     def input_move_key(self, key):
         self.input_key(key, SPEED)
